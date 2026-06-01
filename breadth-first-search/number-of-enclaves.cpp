@@ -1,49 +1,42 @@
 class Solution {
 public:
-    int numEnclaves(vector<vector<int>>& grid) {
-        int m=grid.size();
-        int n=grid[0].size();
-        vector<vector<int>> visited(m, vector<int>(n,0));
-        queue<pair<int, int>> q;
-        for(int i=0; i<m; i++){
-            if(grid[i][0]==1 && !visited[i][0]){ 
-                visited[i][0]=1;
-                q.push({i,0});
+    const int drow[4]={-1,0,1,0};
+    const int dcol[4]={0,-1,0,1};
+    void dfs(int n, int m, vector<vector<int>>&grid, vector<vector<int>>&visited, int i, int j){
+        visited[i][j]=1;
+        grid[i][j]=0;
+        for(int k=0; k<4; k++){
+            int row=drow[k]+i;
+            int col=dcol[k]+j;
+            if(row>=0 && row<n && col>=0 && col<m && !visited[row][col] && grid[row][col]){
+                dfs(n, m,grid, visited, row, col);
             }
-            if(grid[i][n-1]==1 && !visited[i][n-1]){ 
-                visited[i][n-1]=1;
-                q.push({i,n-1});
+        }
+    }
+    int numEnclaves(vector<vector<int>>& grid) {
+        int n=grid.size();
+        int m=grid[0].size();
+        vector<vector<int>> visited(n,vector<int>(m,0));
+        int count=0;
+        for(int i=0; i<n; i++){
+            if(!visited[i][0] && grid[i][0]){
+                dfs(n, m, grid, visited, i, 0);
+            }
+            if(!visited[i][n-1] && grid[i][n-1]){
+                dfs(n, m, grid, visited, i, n-1);
+            }
+        }
+        for(int i=0; i<m; i++){
+            if(!visited[0][i] && grid[0][i]){
+                dfs(n, m,grid, visited, 0, i);
+            }
+            if(!visited[m-1][i] && grid[m-1][i]){
+                dfs(n, m,grid, visited, m-1, i);
             }
         }
         for(int i=0; i<n; i++){
-            if(grid[0][i]==1 && !visited[0][i]){ 
-                visited[0][i]=1;
-                q.push({0,i});
-            }
-            if(grid[m-1][i]==1 && !visited[m-1][i]){ 
-                visited[m-1][i]=1;
-                q.push({m-1,i});
-            }
-        }
-        while(!q.empty()){
-            int r=q.front().first;
-            int c=q.front().second;
-            q.pop();
-            int drow[4]={0,-1,0,1};
-            int dcol[4]={-1,0,1,0};
-            for(int i=0; i<4; i++){
-                int row=r+drow[i];
-                int col=c+dcol[i];
-                if(row>=0 && row<m && col>=0 && col<n && !visited[row][col] && grid[row][col]==1){
-                    visited[row][col]=1;
-                    q.push({row,col});
-                }
-            }
-        }
-        int count=0;
-        for(int i=0; i<m; i++){
-            for(int j=0; j<n; j++){
-                if(!visited[i][j] && grid[i][j]) count++;
+            for(int j=0; j<m; j++){
+                if(grid[i][j]) count++;
             }
         }
         return count;
