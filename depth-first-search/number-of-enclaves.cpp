@@ -22,16 +22,16 @@ public:
             if(!visited[i][0] && grid[i][0]){
                 dfs(n, m, grid, visited, i, 0);
             }
-            if(!visited[i][n-1] && grid[i][n-1]){
-                dfs(n, m, grid, visited, i, n-1);
+            if(!visited[i][m-1] && grid[i][m-1]){
+                dfs(n, m, grid, visited, i, m-1);
             }
         }
         for(int i=0; i<m; i++){
             if(!visited[0][i] && grid[0][i]){
                 dfs(n, m,grid, visited, 0, i);
             }
-            if(!visited[m-1][i] && grid[m-1][i]){
-                dfs(n, m,grid, visited, m-1, i);
+            if(!visited[n-1][i] && grid[n-1][i]){
+                dfs(n, m,grid, visited, n-1, i);
             }
         }
         for(int i=0; i<n; i++){
