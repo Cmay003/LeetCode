@@ -1,44 +1,56 @@
 class Solution {
 public:
+    vector<vector<string>> ans;
+    map<string,int> mpp;
+    void dfs(string b, string word, vector<string>&seq){
+        if(word==b){
+            reverse(seq.begin(), seq.end());
+            ans.push_back(seq);
+            reverse(seq.begin(), seq.end());
+            return;
+        }
+        int steps=mpp[word];
+        for(int i=0; i<word.size(); i++){
+            string original=word;
+            for(char ch='a'; ch<='z'; ch++){
+                word[i]=ch;
+                if(mpp.find(word)!=mpp.end() && mpp[word]+1==steps){
+                    seq.push_back(word);
+                    dfs(b, word, seq);
+                    seq.pop_back();
+                }
+            }
+            word=original;
+        }
+    }
     vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
         unordered_set<string> st(wordList.begin(), wordList.end());
-        queue<vector<string>> q;
-        vector<string> usedOnLevel;
-        usedOnLevel.push_back(beginWord);
-        q.push(usedOnLevel);
-        int level=0;
-        vector<vector<string>> ans;
+        queue<pair<string,int>> q;
+        q.push({beginWord,1});
+        st.erase(beginWord);
+        mpp[beginWord]=1;
         while(!q.empty()){
-            vector<string> vec=q.front();
+            string word=q.front().first;
+            int num=q.front().second;
             q.pop();
-            if(vec.size()>level){
-                level++;
-                for(auto it:vec){
-                    st.erase(it);
-                }
-            }
-            string word=vec.back();
-            if(word==endWord){
-                if(ans.size()==0){
-                    ans.push_back(vec);
-                }
-                else if(ans[0].size()==vec.size()){
-                    ans.push_back(vec);
-                }
-            }
+            if(word==endWord) break;
             for(int i=0; i<word.size(); i++){
                 string original=word;
                 for(char ch='a'; ch<='z'; ch++){
                     word[i]=ch;
                     if(st.find(word)!=st.end()){
-                        vec.push_back(word);
-                        q.push(vec);
-                        usedOnLevel.push_back(word);
-                        vec.pop_back();
+                        q.push({word,num+1});
+                        st.erase(word);
+                        mpp[word]=num+1;
                     }
                 }
                 word=original;
             }
+        }
+        if(mpp.find(endWord)!=mpp.end()){
+            vector<string> seq;
+            seq.push_back(endWord);
+            dfs(beginWord, endWord, seq);
         }
         return ans;
     }
