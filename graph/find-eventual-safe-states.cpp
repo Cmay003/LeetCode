@@ -4,14 +4,12 @@ public:
         int V=graph.size();
         vector<vector<int>> adjRev(V);
         vector<int> indegree(V,0);
+        queue<int> q;
         for(int i=0; i<V; i++){
             indegree[i]=graph[i].size();
             for(auto it:graph[i]){
                 adjRev[it].push_back(i);
             }
-        }
-        queue<int> q;
-        for(int i=0; i<V; i++){
             if(indegree[i]==0) q.push(i);
         }
         vector<int> ans;
