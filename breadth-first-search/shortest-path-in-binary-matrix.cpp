@@ -9,7 +9,7 @@ public:
         int drow[8]={1,1,0,-1,-1,-1,0,1};
         int dcol[8]={0,1,1,1,0,-1,-1,-1};
         vector<vector<int>> dist(n,vector<int>(m,1e9));
-        dist[0][0]=0;
+        dist[0][0]=1;
         while(!q.empty()){
             int dis=q.front().first;
             int r=q.front().second.first;
