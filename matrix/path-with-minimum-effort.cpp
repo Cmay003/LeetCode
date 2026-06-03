@@ -15,6 +15,7 @@ public:
             int r=pq.top().second.first;
             int c=pq.top().second.second;
             pq.pop();
+            if(r==n-1 && c==m-1) return eff;
             for(int i=0; i<4; i++){
                 int row=drow[i]+r;
                 int col=dcol[i]+c;
@@ -28,6 +29,6 @@ public:
                 }
             }
         }
-        return effort[n-1][m-1];
+        return 0;
     }
 };
