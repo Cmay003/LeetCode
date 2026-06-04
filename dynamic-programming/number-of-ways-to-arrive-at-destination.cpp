@@ -7,18 +7,19 @@ public:
             adj[it[0]].push_back({it[1],it[2]});
             adj[it[1]].push_back({it[0],it[2]});
         }
-        vector<int>time(n,1e9);
+        vector<long long>time(n,1e18);
         time[0]=0;
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        priority_queue<pair<long long,int>,vector<pair<long long,int>>,greater<pair<long long,int>>> pq;
         pq.push({0,0});
-        int ans=0;
-        vector<int> ways(n,1);
+        vector<int> ways(n,0);
+        ways[0]=1;
         while(!pq.empty()){
-            int nodeTime=pq.top().first;
+            long long nodeTime=pq.top().first;
             int node=pq.top().second;
-            pq.pop();
+            pq.pop();            
+            if(nodeTime>time[node]) continue;
             for(auto it:adj[node]){
-                int adjTime=it.second;
+                long long adjTime=it.second;
                 int adjNode=it.first;
                 if(adjTime+nodeTime<=time[adjNode]){
                     if(adjTime+nodeTime==time[adjNode]) ways[adjNode]=(ways[adjNode]+ways[node])%MOD;
