@@ -1,5 +1,6 @@
 class Solution {
 public:
+    const int MOD=1e9+7;
     int countPaths(int n, vector<vector<int>>& roads) {
         vector<vector<pair<int,int>>> adj(n);
         for(auto it:roads){
@@ -20,7 +21,7 @@ public:
                 int adjTime=it.second;
                 int adjNode=it.first;
                 if(adjTime+nodeTime<=time[adjNode]){
-                    if(adjTime+nodeTime==time[adjNode]) ways[adjNode]+=ways[node];
+                    if(adjTime+nodeTime==time[adjNode]) ways[adjNode]=(ways[adjNode]+ways[node])%MOD;
                     else{
                         ways[adjNode]=ways[node];
                         time[adjNode]=adjTime+nodeTime;
