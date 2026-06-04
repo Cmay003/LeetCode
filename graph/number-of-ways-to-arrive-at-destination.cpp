@@ -22,7 +22,7 @@ public:
                 if(adjTime+nodeTime<=time[adjNode]){
                     if(adjTime+nodeTime==time[adjNode]) ways[adjNode]+=ways[node];
                     else{
-                        ways[adjNode]=1;
+                        ways[adjNode]=ways[node];
                         time[adjNode]=adjTime+nodeTime;
                         pq.push({adjTime+nodeTime,adjNode});
                     } 
