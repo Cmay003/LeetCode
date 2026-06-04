@@ -11,6 +11,7 @@ public:
         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
         pq.push({0,0});
         int ans=0;
+        vector<int> ways(n,1);
         while(!pq.empty()){
             int nodeTime=pq.top().first;
             int node=pq.top().second;
@@ -18,13 +19,16 @@ public:
             for(auto it:adj[node]){
                 int adjTime=it.second;
                 int adjNode=it.first;
-                if(adjNode==n-1) ans++;
-                if(adjTime+nodeTime<time[adjNode]){
-                    time[adjNode]=adjTime+nodeTime;
-                    pq.push({adjTime+nodeTime,adjNode});
+                if(adjTime+nodeTime<=time[adjNode]){
+                    if(adjTime+nodeTime==time[adjNode]) ways[adjNode]+=ways[node];
+                    else{
+                        ways[adjNode]=1;
+                        time[adjNode]=adjTime+nodeTime;
+                        pq.push({adjTime+nodeTime,adjNode});
+                    } 
                 }
             }
         }
-        return ans;
+        return ways[n-1];
     }
 };
