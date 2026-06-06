@@ -35,11 +35,11 @@ public:
             row=max(row,it[0]);
             col=max(col,it[1]);
         }
-        DisjointSet ds=DisjointSet(row+col+1);
+        DisjointSet ds=DisjointSet(row+col+2);
         unordered_map<int,int> mpp;
         for(auto it:stones){
             int nodeRow=it[0];
-            int nodeCol=it[1]+row;
+            int nodeCol=it[1]+row+1;
             ds.unionBySize(nodeRow,nodeCol);
             mpp[nodeRow]=1;
             mpp[nodeCol]=1;
