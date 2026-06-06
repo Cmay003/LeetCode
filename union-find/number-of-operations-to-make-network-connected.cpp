@@ -1,5 +1,5 @@
 class DisjointSet{
-    public: vector<int> parent, size;
+    vector<int> parent, size;
     public:
     DisjointSet(int n){
         parent.resize(n);
@@ -39,11 +39,12 @@ public:
             int v=it[1];
             if(ds.findPar(u)!=ds.findPar(v)){
                 ds.unionBySize(u,v);
+                ans++;
             }
         }
         int count=-1;
         for(int i=0; i<n; i++){
-            if(ds.parent[i]==i) count++;
+            if(ds.findPar[i]==i) count++;
         }
         return count;
     }
