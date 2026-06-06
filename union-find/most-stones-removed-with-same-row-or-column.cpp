@@ -2,9 +2,9 @@ class DisjointSet{
     vector<int> parent,size;
     public:
     DisjointSet(int n){
-        parent.resize(n);
-        size.resize(n,1);
-        for(int i=0; i<n; i++){
+        parent.resize(n+1);
+        size.resize(n+1,1);
+        for(int i=0; i<=n; i++){
             parent[i]=i;
         }
     }
@@ -35,7 +35,7 @@ public:
             row=max(row,it[0]);
             col=max(col,it[1]);
         }
-        DisjointSet ds=DisjointSet(row+col+2);
+        DisjointSet ds=DisjointSet(row+col+1);
         unordered_map<int,int> mpp;
         for(auto it:stones){
             int nodeRow=it[0];
