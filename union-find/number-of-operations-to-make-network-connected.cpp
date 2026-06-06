@@ -44,7 +44,7 @@ public:
         }
         int count=-1;
         for(int i=0; i<n; i++){
-            if(ds.findPar[i]==i) count++;
+            if(ds.findPar(i)==i) count++;
         }
         return count;
     }
