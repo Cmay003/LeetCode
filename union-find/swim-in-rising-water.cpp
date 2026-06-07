@@ -14,7 +14,7 @@ public:
     }
     int swimInWater(vector<vector<int>>& grid) {
         int n=grid.size();
-        int low=0, high=n*n-1;
+        int low=grid[0][0], high=n*n-1;
         while(low<=high){
             int mid=(low+high)/2;
             vector<vector<int>> visited(n,vector<int>(n,0));
