@@ -10,6 +10,8 @@ public:
             int time=pq.top().first;
             int row=pq.top().second.first;
             int col=pq.top().second.second;
+            if(time>times[row][col]) continue;
+            if(row==n-1 && col==n-1) return time;
             pq.pop();
             int drow[4]={-1,0,1,0};
             int dcol[4]={0,-1,0,1};
