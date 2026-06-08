@@ -52,7 +52,7 @@ public:
                     }
                 }
             }
-            if(findPar(0)==findPar(n*n-1)) return t;
+            if(ds.findPar(0)==ds.findPar(n*n-1)) return t;
         }
         return -1;
     }
