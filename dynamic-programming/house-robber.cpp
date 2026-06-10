@@ -2,13 +2,16 @@ class Solution {
 public:
     int rob(vector<int>& nums) {
         int n=nums.size();
-        vector<int> dp(n,-1);
-        dp[0]=nums[0];
+        int prev=nums[0];
+        int prev2=0;
+        int ans=0;
         for(int i=1; i<n; i++){
-            int pick=(i>1)?nums[i]+dp[i-2]:nums[i];
-            int notP=dp[i-1];
-            dp[i]=max(pick,notP);
+            int pick=nums[i]+prev2;
+            int notP=prev;
+            ans=max(pick,notP);
+            prev2=prev;
+            prev=ans;           
         }
-        return dp[n-1];
+        return ans;
     }
 };
