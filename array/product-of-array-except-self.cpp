@@ -8,8 +8,8 @@ public:
         int cnt=0;
         for(int i:nums){
             if(i==0){
-                if(zero==0) cnt++;
-                else zero=0;
+                zero=0;
+                cnt++;
             }
             else prod*=i;
         }
