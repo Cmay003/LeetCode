@@ -17,7 +17,9 @@ public:
         int ans=-1;
         for(int i=0; i<3; i++){
             if(board[i][0]==1 && board[i][1]==1 && board[i][2]==1) ans=1;
+            if(board[i][0]==0 && board[i][1]==0 && board[i][2]==0) ans=0;
             if(board[0][i]==0 && board[1][i]==0 && board[2][i]==0) ans=0;
+            if(board[0][i]==1 && board[1][i]==1 && board[2][i]==1) ans=1;
         }
         if((board[0][0]==1 && board[1][1]==1 && board[2][2]==1) || (board[0][2]==1 && board[1][1]==1 && board[2][0]==1)) ans=1;
         if((board[0][0]==0 && board[1][1]==0 && board[2][2]==0) || (board[0][2]==0 && board[1][1]==0 && board[2][0]==0)) ans=0;
