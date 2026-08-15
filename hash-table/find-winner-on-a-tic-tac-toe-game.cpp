@@ -23,6 +23,7 @@ public:
         if((board[0][0]==0 && board[1][1]==0 && board[2][2]==0) || (board[0][2]==0 && board[1][1]==0 && board[2][0]==0)) ans=0;
         if(ans==0) return "B";
         else if(ans==1) return "A";
-        else return "Draw";
+        else if(ans==-1 && n==9) return "Draw";
+        else return "Pending";
     }
 }; 
