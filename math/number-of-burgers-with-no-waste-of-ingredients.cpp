@@ -16,6 +16,7 @@ public:
                 jumbo++;
             }
         }
-        return {jumbo,small};
+        if(tomato==0 && cheese==0) return {jumbo,small};
+        return {};
     }
 };
