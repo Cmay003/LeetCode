@@ -23,6 +23,6 @@ public:
     int distinctSubseqII(string s) {
         int n = s.size();
         vector<int> dp(n, -1);
-        return (helper(s, n - 1, dp)-1) % MOD;
+        return (helper(s, n - 1, dp)-1+MOD) % MOD;
     }
 };
