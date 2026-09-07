@@ -11,7 +11,7 @@ public:
         int n=s.size();
         int m=t.size();
         if(t.size()==0) return 1;
-        vector<vector<int>> dp(n+1,vector<long long>(m+1));
+        vector<vector<long long>> dp(n+1,vector<long long>(m+1));
         for(int i=0;i<=m;i++) dp[n][i]=0;
         for(int i=0;i<=n;i++) dp[i][m]=1;        
         for(int i=n-1; i>=0; i--){
