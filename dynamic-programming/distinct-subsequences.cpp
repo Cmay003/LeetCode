@@ -11,16 +11,21 @@ public:
         int n=s.size();
         int m=t.size();
         if(t.size()==0) return 1;
-        vector<vector<unsigned long long>> dp(n+1,vector<unsigned long long>(m+1));
-        for(int i=0;i<=m;i++) dp[n][i]=0;
-        for(int i=0;i<=n;i++) dp[i][m]=1;        
+        // vector<vector<unsigned long long>> dp(n+1,vector<unsigned long long>(m+1));
+        vector<unsigned long long> curr(m+1,0);
+        vector<unsigned long long> prev(m+1,0);
+        prev[m]=1;
+        // for(int i=0;i<=m;i++) dp[n][i]=0;
+        // for(int i=0;i<=n;i++) dp[i][m]=1;        
         for(int i=n-1; i>=0; i--){
+            curr[m]=1;
             for(int j=0; j<m; j++){
-                if(s[i]==t[j]) dp[i][j]=dp[i+1][j]+dp[i+1][j+1];
-                else dp[i][j]=dp[i+1][j];
+                if(s[i]==t[j]) curr[j]=prev[j]+prev[j+1];
+                else curr[j]=prev[j];
+                prev=curr;
             }
         }
-        return dp[0][0];
+        return prev[0];
         // return helper(s,t,0,0,dp);
     }
 };
