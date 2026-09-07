@@ -4,8 +4,8 @@ public:
         if(j==t.size()) return 1;
         if(i==s.size()) return 0;
         if(dp[i][j]!=-1) return dp[i][j];
-        if(s[i]==t[j]) return dp[i][j]=helper(s,t,i+1,j)+helper(s,t,i+1,j+1);
-        return dp[i][j]=helper(s,t,i+1,j);
+        if(s[i]==t[j]) return dp[i][j]=helper(s,t,i+1,j,dp)+helper(s,t,i+1,j+1,dp);
+        return dp[i][j]=helper(s,t,i+1,j,dp);
     }
     int numDistinct(string s, string t) {
         int n=s.size();
