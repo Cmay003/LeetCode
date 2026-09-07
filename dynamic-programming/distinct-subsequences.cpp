@@ -10,6 +10,7 @@ public:
     int numDistinct(string s, string t) {
         int n=s.size();
         int m=t.size();
+        if(t.size()==0) return 1;
         vector<vector<int>> dp(n,vector<int>(m,-1));
         return helper(s,t,0,0,dp);
     }
